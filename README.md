@@ -11,6 +11,34 @@ Vue 3 Composition API를 기반으로 만든 실시간 날씨 대시보드입니
 - Element Plus
 - Chart.js / vue-chartjs
 
+## 핵심 프로젝트 구조
+
+```
+src/
+├── main.js
+├── App.vue
+├── router/
+│   └── index.js
+├── stores/
+│   ├── favoriteStore.js
+│   └── configStore.js
+├── components/weather/
+│   ├── BaseDashboardCard.vue
+│   ├── SearchBar.vue
+│   ├── WeatherCard.vue
+│   ├── TemperatureChart.vue
+│   └── UnitToggle.vue
+├── views/
+│   ├── WeatherHomeView.vue
+│   ├── WeatherDetailView.vue
+│   ├── FavoriteListView.vue
+│   ├── WeatherAboutView.vue
+│   └── NotFoundView.vue
+└── assets/
+    ├── base.css
+    └── main.css
+```
+
 ---
 
 ## 1. 컴포넌트 설계
