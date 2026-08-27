@@ -7,6 +7,7 @@ import BaseDashboardCard from '../components/weather/BaseDashboardCard.vue'
 import SearchBar from '../components/weather/SearchBar.vue'
 import WeatherCard from '../components/weather/WeatherCard.vue'
 import { ElMessage } from 'element-plus'
+import TemperatureChart from '../components/weather/TemperatureChart.vue'
 
 const router = useRouter()
 
@@ -171,6 +172,8 @@ const handleToggleFavorite = (id) => {
         </p>
       </div>
     </BaseDashboardCard>
+
+    <TemperatureChart :weather-list="sortedWeatherList" />
   </div>
 </template>
 
