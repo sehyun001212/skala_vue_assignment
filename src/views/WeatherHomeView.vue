@@ -216,6 +216,7 @@ const handleToggleFavorite = (id) => {
   gap: 20px;
   align-items: flex-start;
   max-width: 700px;
+  min-height: 220px;
   width: 100%;
   margin: 0 auto;
 }
