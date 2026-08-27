@@ -26,6 +26,21 @@ const cityNameMap = {
   Yangyang: '양양군',
 }
 
+const cityKoreanNameMap = {
+  Seoul: '서울',
+  Busan: '부산',
+  Incheon: '인천',
+  Daegu: '대구',
+  Daejeon: '대전',
+  Gwangju: '광주',
+  Suwon: '수원',
+  Jeju: '제주',
+  Wonju: '원주',
+  Gangneung: '강릉',
+  Chuncheon: '춘천',
+  Yangyang: '양양',
+}
+
 const fetchCityIntro = async (cityId) => {
   try {
     const koreanFullName = cityNameMap[cityId] || cityId
@@ -65,7 +80,7 @@ const fetchCityDetail = async () => {
   )
 
   cityInfo.value = {
-    name: weatherResponse.data.name,
+    name: cityKoreanNameMap[cityId] || weatherResponse.data.name,
     temp: Math.round(weatherResponse.data.main.temp),
     status: weatherResponse.data.weather[0].description,
     humidity: weatherResponse.data.main.humidity,
