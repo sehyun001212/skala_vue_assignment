@@ -155,7 +155,11 @@ const handleToggleFavorite = (id) => {
     <p class="status-bar">{{ selectedCityInfo }}</p>
 
     <BaseDashboardCard>
-      <div class="weather-list" v-loading="isLoading">
+      <div
+        class="weather-list"
+        v-loading="isLoading"
+        element-loading-text="날씨 정보를 불러오는 중입니다..."
+      >
         <WeatherCard
           v-for="weather in sortedWeatherList"
           :key="weather.id"
@@ -173,7 +177,13 @@ const handleToggleFavorite = (id) => {
       </div>
     </BaseDashboardCard>
 
-    <TemperatureChart :weather-list="sortedWeatherList" />
+    <div
+      v-loading="isLoading"
+      element-loading-text="도시별 온도를 비교하는 중입니다..."
+      class="chart-loading-wrapper"
+    >
+      <TemperatureChart :weather-list="sortedWeatherList" />
+    </div>
   </div>
 </template>
 
@@ -230,5 +240,15 @@ const handleToggleFavorite = (id) => {
   padding: 24px;
   color: #999;
   font-style: italic;
+}
+
+.chart-loading-wrapper {
+  width: 100%;
+  max-width: 960px;
+  min-height: 300px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-sizing: border-box;
 }
 </style>
