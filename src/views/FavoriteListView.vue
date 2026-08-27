@@ -4,6 +4,7 @@ import { RouterLink } from 'vue-router'
 import axios from 'axios'
 import { useFavoriteStore } from '../stores/favoriteStore'
 import { useConfigStore } from '../stores/configStore'
+import BaseDashboardCard from '../components/weather/BaseDashboardCard.vue'
 
 const favoriteStore = useFavoriteStore()
 const configStore = useConfigStore()
@@ -61,25 +62,28 @@ const favoriteWeatherList = computed(() => {
   <div class="favorite-page">
     <h2>즐겨찾기한 도시</h2>
 
-    <div class="favorite-list" v-loading="isLoading">
-      <div class="favorite-card" v-for="weather in favoriteWeatherList" :key="weather.id">
-        <h3>{{ weather.name }}</h3>
-        <p>{{ weather.temp }}{{ configStore.unitSymbol }}</p>
-        <p>{{ weather.status }}</p>
-        <el-tag v-if="weather.temp >= 25" type="danger">🔥 더움 (25도 이상)</el-tag>
-        <el-tag v-else type="primary">❄️ 선선함 (25도 미만)</el-tag>
+    <BaseDashboardCard>
+      <div class="favorite-list" v-loading="isLoading">
+        <div class="favorite-card" v-for="weather in favoriteWeatherList" :key="weather.id">
+          <h3>{{ weather.name }}</h3>
+          <p>{{ weather.temp }}{{ configStore.unitSymbol }}</p>
+          <p>{{ weather.status }}</p>
+          <el-tag v-if="weather.temp >= 25" type="danger">🔥 더움 (25도 이상)</el-tag>
+          <el-tag v-else type="primary">❄️ 선선함 (25도 미만)</el-tag>
+        </div>
+        <p v-if="!isLoading && favoriteWeatherList.length === 0" class="no-result">
+          즐겨찾기한 도시가 없습니다.
+        </p>
       </div>
-    </div>
-    <p v-if="!isLoading && favoriteWeatherList.length === 0" class="no-result">
-      즐겨찾기한 도시가 없습니다.
-    </p>
+    </BaseDashboardCard>
 
-    <RouterLink to="/">메인으로 돌아가기</RouterLink>
+    <RouterLink to="/" class="back-link">메인으로 돌아가기</RouterLink>
   </div>
 </template>
 
 <style scoped>
 .favorite-page {
+  width: 100%;
   min-height: 100vh;
   padding: 48px 64px;
   background-color: #eef3fb;
@@ -91,16 +95,22 @@ const favoriteWeatherList = computed(() => {
 }
 
 .favorite-page h2 {
+  width: 100%;
+  max-width: 960px;
   font-size: 32px;
   margin-bottom: 24px;
+  text-align: center;
 }
 
 .favorite-list {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: center;
-  margin-bottom: 24px;
+  align-items: flex-start;
+  max-width: 700px;
+  min-height: 220px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .favorite-card {
@@ -113,8 +123,21 @@ const favoriteWeatherList = computed(() => {
 }
 
 .no-result {
+  width: 100%;
+  text-align: center;
+  padding: 24px;
   color: #999;
   font-style: italic;
-  margin-bottom: 24px;
+}
+
+.back-link {
+  margin-top: 16px;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.back-link:hover {
+  color: #42b883;
 }
 </style>
